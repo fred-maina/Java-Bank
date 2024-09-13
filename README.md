@@ -15,4 +15,4 @@ Deposit money: Enter the amount to deposit, and it will be added to your balance
 Withdraw money: Enter the amount to withdraw, and if the balance is sufficient, the transaction will succeed.
 Check balance: View your current account balance.
 # Python Version:
-A Python version of this program is also available,  find it <a href="https:www.github.com/fred-maina/bank"> here. <a/>
+A Python version of this program is also available,  find it <a href="https:www.github.com/fred-maina/bank"> here. </a>
