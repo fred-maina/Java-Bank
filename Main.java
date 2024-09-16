@@ -30,6 +30,10 @@ class Account{
     int getBalance(){
         return this.accountBalance;
     }
+    String setAccountHolder(String name){
+        this.accountHolder =name;
+        return "Successfully Changed the Account Holders name";
+    }
 }
 
 
@@ -90,8 +94,8 @@ public class Main{
                 break;
             case(2):
                 System.out.println("Please enter the amount of money you wish to withdraw");
-                int depo_amount =scanner.nextInt();
-                System.out.println(bank.performTransaction(accountNumber,"withdraw",depo_amount)+"\n");
+                int depositAmount =scanner.nextInt();
+                System.out.println(bank.performTransaction(accountNumber,"withdraw",depositAmount)+"\n");
                 break;
             case(3):
                 System.out.println(bank.Balance(accountNumber)+"\n");
