@@ -68,6 +68,10 @@ class Bank{ Account currentAccount;
         else{
             return " Account does not exist kindly create account first";
         }
+
+    }
+    public String account_info(){
+        return currentAccount.accountInformation();
     }
 }
 public class Main{
@@ -84,14 +88,26 @@ public class Main{
         System.out.println(bank.CreateAccount(accountNumber,accountName,initialBalance));
         boolean exit =false;
         do{
-        System.out.println("Choose any of the following options \n 1. Deposit \n 2. Withdraw \n 3. Check Balance \n 4. Exit\n");
+        System.out.println("Choose any of the following options \n 1. Deposit \n 2. Withdraw \n 3. Check Balance \n 4. Get account information \n 5. Exit\n");
          int choice = scanner.nextInt();
         switch (choice){
             case (1):
+                boolean valid =false;
+                while (! valid){
                 System.out.println("Please Enter the amount of money you wish to deposit: ");
-                 int amount = scanner.nextInt();
-                System.out.println(bank.performTransaction(accountNumber,"deposit",amount)+"\n");
-                break;
+
+                try {
+                    int amount = scanner.nextInt();
+                    System.out.println(bank.performTransaction(accountNumber,"deposit",amount)+"\n");
+                    valid=true;
+
+                }
+                catch (Exception e){
+                    System.out.println("Please enter an Integer");
+                    scanner.next();
+                }
+                }
+            break;
             case(2):
                 System.out.println("Please enter the amount of money you wish to withdraw");
                 int depositAmount =scanner.nextInt();
@@ -100,7 +116,9 @@ public class Main{
             case(3):
                 System.out.println(bank.Balance(accountNumber)+"\n");
                 break;
-            case(4):
+            case (4):
+                System.out.println(bank.account_info());
+            case(5):
                 exit=true;
                 break;
         }
