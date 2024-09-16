@@ -2,9 +2,9 @@ import  java.util.Scanner;
 import java.util.Random;
 
 class Account{
-    String accountHolder;
+    private String accountHolder;
     int accountNumber;
-    int accountBalance;
+    private int  accountBalance;
     public Account(String accountHolder, int accountNumber, int accountBalance){
         this.accountBalance=accountBalance;
         this.accountHolder=accountHolder;
@@ -27,9 +27,13 @@ class Account{
     String checkBalance(){
         return "Your balance is kes "+ this.accountBalance;
     }
+    int getBalance(){
+        return this.accountBalance;
+    }
 }
-class Bank{
-    Account currentAccount;
+
+
+class Bank{ Account currentAccount;
    String bankName;
 
     public Bank(String bankName){
@@ -38,18 +42,15 @@ class Bank{
     }
     public String CreateAccount(int accountNumber, String accountName,int initialAmount){
         currentAccount =new Account(accountName,accountNumber,initialAmount);
-        return "Welcome "+accountName+" you have successfully opened an account your balance is kes "+currentAccount.accountBalance;
+        return "Welcome "+accountName+" you have successfully opened an account your balance is kes "+currentAccount.getBalance();
     }
     public String performTransaction(int accountNumber, String transactionType, int amount){
         if (accountNumber == currentAccount.accountNumber){
-            switch (transactionType){
-                case ("deposit"):
-                    return(currentAccount.deposit(amount));
-                case ("withdraw"):
-                    return (currentAccount.withdraw((amount)));
-                default:
-                    return "Kindly specify a correct transaction type";
-            }
+            return switch (transactionType) {
+                case ("deposit") -> (currentAccount.deposit(amount));
+                case ("withdraw") -> (currentAccount.withdraw((amount)));
+                default -> "Kindly specify a correct transaction type";
+            };
 
         }
         else {
@@ -77,6 +78,7 @@ public class Main{
         int accountNumber = 1000000+random.nextInt(900000);//Generate a random six-digit number that I can use as the account Number
         int initialBalance=0;
         System.out.println(bank.CreateAccount(accountNumber,accountName,initialBalance));
+        boolean exit =false;
         do{
         System.out.println("Choose any of the following options \n 1. Deposit \n 2. Withdraw \n 3. Check Balance \n 4. Exit\n");
          int choice = scanner.nextInt();
@@ -94,18 +96,12 @@ public class Main{
             case(3):
                 System.out.println(bank.Balance(accountNumber)+"\n");
                 break;
-
-
+            case(4):
+                exit=true;
+                break;
         }
 
-        }while (true);
-
-
-
-
-
-
-
+        }while (! exit);
     }
 }
 
